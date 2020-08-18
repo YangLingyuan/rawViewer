@@ -1,31 +1,31 @@
 # rawViewer
 ## 文件结构
-root
-├── rawViewer.py
-├── plugins
-│   ├── __init__.py
-│   ├── plusOne
-│   │   ├── plusOne.c
-│   │   ├── plusOne.dll
-│   │   └── plusOne.so
-│   └── raw2rgb
-│       ├── config.py
-│       ├── const_def.py
-│       ├── conversion_rules.py
-│       ├── fileoperations.py
-│       ├── __init__.py
-│       ├── mipiraw2raw.py
-│       ├── multi_coroutine_cc.py
-│       ├── __pycache__
-│       │   ├── config.cpython-36.pyc
-│       │   ├── const_def.cpython-36.pyc
-│       │   ├── conversion_rules.cpython-36.pyc
-│       │   ├── fileoperations.cpython-36.pyc
-│       │   ├── __init__.cpython-36.pyc
-│       │   ├── mipiraw2raw.cpython-36.pyc
-│       │   ├── multi_coroutine_cc.cpython-36.pyc
-│       │   └── raw2rgb.cpython-36.pyc
-│       └── raw2rgb.py
+root  
+├── rawViewer.py  
+├── plugins  
+│   ├── __init__.py  
+│   ├── plusOne  
+│   │   ├── plusOne.c  
+│   │   ├── plusOne.dll  
+│   │   └── plusOne.so  
+│   └── raw2rgb  
+│       ├── config.py  
+│       ├── const_def.py  
+│       ├── conversion_rules.py  
+│       ├── fileoperations.py  
+│       ├── __init__.py  
+│       ├── mipiraw2raw.py  
+│       ├── multi_coroutine_cc.py  
+│       ├── __pycache__  
+│       │   ├── config.cpython-36.pyc  
+│       │   ├── const_def.cpython-36.pyc  
+│       │   ├── conversion_rules.cpython-36.pyc  
+│       │   ├── fileoperations.cpython-36.pyc  
+│       │   ├── __init__.cpython-36.pyc  
+│       │   ├── mipiraw2raw.cpython-36.pyc  
+│       │   ├── multi_coroutine_cc.cpython-36.pyc  
+│       │   └── raw2rgb.cpython-36.pyc  
+│       └── raw2rgb.py  
 ## 命令行交互与增加插件
 ### 命令行交互
 通过命令 python3 rawViewer.py [pathToImage] {--[module] [arguments]}进行调用
