@@ -32,10 +32,16 @@ class RawProcessor:
                 mipiRawParser.raw_array = mipiRawParser.mipiraw2raw(mipiRawParser.raw_data_bytearray, mipiRawParser.bits, mipiRawParser.loss)
             mipiRawParser.raw_array.tofile("temp.raw")
         
+        if options.unpackMipiraw:
+            unpack=self.loadPlugin("unpackMipiraw")
+            # set parameters
+            unpack.setParam(c_char_p(path.encode()), options.unpackMipiraw[0], options.unpackMipiraw[1], 10, True)
+            self.loadedPlugins["unpackMipiraw"]=unpack
+
         if options.plusOne:
             plusOne=self.loadPlugin("plusOne")
             # set parameters
-            plusOne.setParam(options.plusOne[0]);
+            plusOne.setParam(options.plusOne[0])
             self.loadedPlugins["plusOne"]=plusOne
 
 
@@ -58,6 +64,8 @@ class RawProcessor:
             self.loadedPlugins["mipiRawParser"].torgb().show()
         if "plusOne" in self.loadedPlugins:
             print(self.loadedPlugins["plusOne"].run())
+        if "unpackMipiraw" in self.loadedPlugins:
+            print(self.loadedPlugins["unpackMipiraw"].run())
 
 
 
@@ -67,6 +75,7 @@ if __name__=="__main__":
     parser.add_argument('imagePath', type=str,  help='path to the mipi raw image to be processed')
     parser.add_argument('--raw2rgb', type=int, nargs='*')
     parser.add_argument('--plusOne', type=int, nargs='*')
+    parser.add_argument('--unpackMipiraw', type=int, nargs='*')
     # add the plugin name as an argument here
 
     args=parser.parse_args(sys.argv[1:])
