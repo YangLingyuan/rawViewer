@@ -1,6 +1,6 @@
 # rawViewer
 ## 文件结构
-.
+.  
 ├── plugins  
 │   ├── __init__.py  
 │   ├── plusOne  
