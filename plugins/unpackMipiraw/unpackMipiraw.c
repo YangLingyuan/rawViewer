@@ -67,11 +67,11 @@ int run(void)
             pixel[0] = (u_int16_t)(p[0]) << 2;
             pixel[0] += (u_int16_t)p[4] & (u_int16_t)(0x03);
             pixel[1] = (u_int16_t)(p[1]) << 2;
-            pixel[1] += (u_int16_t)p[4] & (u_int16_t)(0x0c);
+            pixel[1] += ((u_int16_t)p[4] & (u_int16_t)(0x0c))>>2;
             pixel[2] = (u_int16_t)(p[2]) << 2;
-            pixel[2] += (u_int16_t)p[4] & (u_int16_t)(0x30);
+            pixel[2] += ((u_int16_t)p[4] & (u_int16_t)(0x30))>>4;
             pixel[3] = (u_int16_t)(p[3]) << 2;
-            pixel[3] += (u_int16_t)p[4] & (u_int16_t)(0xc0);
+            pixel[3] += ((u_int16_t)p[4] & (u_int16_t)(0xc0))>>6;
             fwrite(&pixel, sizeof(u_int16_t), 4, fo);
         }
     }

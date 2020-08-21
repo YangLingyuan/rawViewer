@@ -7,11 +7,6 @@
 │   │   ├── plusOne.c  
 │   │   ├── plusOne.dll  
 │   │   └── plusOne.so  
-│   ├── __pycache__  
-│   │   ├── __init__.cpython-36.pyc  
-│   │   ├── parseMIPIraw.cpython-36.pyc  
-│   │   ├── plugin1.cpython-36.pyc  
-│   │   └── plugin2.cpython-36.pyc  
 │   ├── raw2rgb  
 │   │   ├── config.py  
 │   │   ├── const_def.py  
@@ -32,7 +27,8 @@
 ### 命令行交互
 通过命令 python3 rawViewer.py [pathToImage] {--[module] [arguments]}进行调用
 eg：
-python3 rawViewer.py Sample_MIPIRAW10bit_Pattern_RGGB_W4000_H3000.raw --raw2rgb 3000 4000
+python3 rawViewer.py Sample_MIPIRAW10bit_Pattern_RGGB_W4000_H3000.raw --raw2rgb 4000 3000  
+python3 rawViewer.py Sample_MIPIRAW10bit_Pattern_RGGB_W4000_H3000.raw --unpackMipiraw 4000 3000  
 ### 添加插件
 将源码（py/c）放在plugins文件夹下，通过 命令行调用。
 parser.add_argument('--raw2rgb', type=int, nargs='*') 
