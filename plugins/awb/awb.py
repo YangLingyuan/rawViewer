@@ -27,11 +27,11 @@ def gray_world_assumption(r,g,b):
     return r_gain,g_gain,b_gain
 
 
-def setParameters(rGain=0,gGain=0,bGain=0):
+def setParameters(Gain):
     global r_gain,g_gain,b_gain
-    r_gain        = rGain
-    g_gain        = gGain
-    b_gain        = bGain
+    r_gain        = Gain[0]
+    g_gain        = Gain[1]
+    b_gain        = Gain[2]
 
 
 def run(rgb_array):

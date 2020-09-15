@@ -24,7 +24,7 @@ class RawProcessor:
             self.loadedPlugins[dirs]=self.loadPlugin(dirs)
         del options.imagePath
         print(vars(options))
-        print(self.pluginList)
+        # print(self.pluginList)
         self.pipe = pipeline.Pipeline()
         self.pipe.create()
         #plugin_init_data_list:[pluginObject, module name, [attributes]]
@@ -33,6 +33,7 @@ class RawProcessor:
                 if self.loadedPlugins[module]:
                     paras = getattr(options,module)
                     paras.append(self._path)
+                    print(paras) 
                     self.plugin_init_data_list.append([self.loadedPlugins[module], module, paras])
                 else: 
                     raise Exception("plugin"+module+" is not available, make sure you spell it correctly")
@@ -66,10 +67,11 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser(description='Choose plugins and their arguments to load')
     parser.add_argument('imagePath', type=str,  help='path to the mipi raw image to be processed')
     parser.add_argument('--raw2rgb', type=int, nargs='*')
-    parser.add_argument('--mipiraw2raw', type=int, nargs='*')
+    parser.add_argument('--mipiraw2raw', type=int, nargs='2')
     parser.add_argument('--blc', type=int, nargs=1)
-    parser.add_argument('--awb', type=int, nargs='?')
-    parser.add_argument('--demosaic', type=str, nargs='*')
+    parser.add_argument('--demosaic', type=str, nargs='1')
+    parser.add_argument('--awb', type=int, nargs='*')
+    
     # add the plugin name as an argument here
 
     args=parser.parse_args(sys.argv[1:])
