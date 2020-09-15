@@ -4,11 +4,10 @@
 # Calculation mode switch
 debug = True
 release = False
+
 parallel_computing_multi_coroutine = True
 parallel_computing_multi_Progress = False
 cuda_acceleration = False
-
-
 
 if parallel_computing_multi_coroutine: # multi-coroutine
     import asyncio
@@ -41,8 +40,8 @@ if debug:
     def print_e(e:str=""):
         raise Exception("E: {}".format(e))
     
-    def print_m(m:str=""):
-        print("M: {}".format(m))
+    def print_m(*m_args):
+        print("M: ",*m_args)
 else:
     def test_run_time(fn):
         def measure_time(*args, **kwargs):
