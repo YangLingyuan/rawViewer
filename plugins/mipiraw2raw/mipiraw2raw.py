@@ -36,10 +36,10 @@ class Mipiraw2Raw(FileOperations):
                     Whether to discard the 2 low-order data when converting 10bit mipi raw images, the default value is True.
 
     '''
-    def __init__(self, para, stride:int=None, bits:int=10, loss:bool=False):
-        self.__path = para[2]
-        self.__width = para[0]
-        self.__height = para[1]
+    def __init__(self, path:str, width:int, height:int, stride:int=None, bits:int=10, loss:bool=False):
+        self.__path = path
+        self.__width = width
+        self.__height = height
         self.__stride = stride
         self.__bits = bits
         self.__loss = loss
@@ -96,7 +96,7 @@ class Mipiraw2Raw(FileOperations):
             if not stride:
                 self.__stride = cr_stride_calc(width=self.__width, bits=self.__bits)
             else:
-                if cr_stride_check(stride=self.__stride, width=self.__width):
+                if cr_stride_check(stride=self.__stride, width=self.__width, bits=self.__bits):
                     print_e("The stride parameter input is incorrect, the stride parameter should be greater than the width parameter.")
                 self.__stride = stride
     @property
@@ -245,8 +245,38 @@ class Mipiraw2Raw(FileOperations):
         mipiraw16_array.reshape((-1,2)).astype(np.uint16)
         mipiraw16_array[:,1] = np.left_shift(mipiraw16_array[:,1],8) | mipiraw16_array[:,0]
         return np.delete(mipiraw16_array,[0],1).reshape((1,-1))
-    def run(self, buffer):
-        buffer = self.toraw()
+    
+path=""
+width=None
+height =None 
+stride=None 
+bits=10 
+loss=False 
+mipiraw2raw_processor=None
+
+def setParameters(args):
+    global path, width, height, stride, bits, loss, mipiraw2raw_processor
+    path = args[-1]
+    args.pop()
+    local_params = [width, height, stride, bits, loss]
+    # print(args)
+    i=0
+    while i < len(args):
+        local_params[i] = args[i]
+        i=i+1
+    # Call main function
+
+    mipiraw2raw_processor = Mipiraw2Raw(path, 
+                                local_params[0],
+                                local_params[1], 
+                                local_params[2],
+                                local_params[3], 
+                                local_params[4])
+    # raw.show()
+
+      
+def run(buffer):
+        buffer = mipiraw2raw_processor.toraw()
         return buffer
 # Shell model Interface
-mipiraw2raw = Mipiraw2Raw
+# mipiraw2raw = Mipiraw2Raw
