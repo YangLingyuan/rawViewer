@@ -36,13 +36,13 @@ def read_lsc_eeprom_data(eeprom_lsc_data_path, block_height, block_width):
 #    return new_img
 
 def apply_shading_to_image(raw_array, pattern, height_block, width_block, gain_map_dict):
+   print(raw_array.shape)
    raw_array_channel = [raw_array[0::2,0::2],raw_array[0::2,1::2],raw_array[1::2,0::2],raw_array[1::2,1::2]]
    raw_array_dict = dict()
    res_array =np.zeros(raw_array.shape,dtype=np.uint16)
 
    for index in range(4):
       raw_array_dict[pattern[index]] =  raw_array_channel[index]
-
    original_H, original_W = raw_array_dict["R"].shape
 
    H = math.ceil((original_H + height_block)/height_block) * height_block
@@ -198,3 +198,24 @@ def lsc_correct(src_raw_array, width, height, pattern=["R","GR","GB","B"], eepro
    #    return new_raw_img
 
 
+
+local_params = []
+
+def setParameters(args):
+   global local_params
+   eeprom_lsc_data_path = None
+   pattern = ["R","GR","GB","B"]
+   block_height = 13
+   block_width = 17
+   local_params = [eeprom_lsc_data_path, pattern, block_height, block_width]
+   args.pop()
+   i=0
+   while i < len(args):
+      local_params[i] = args[i]
+      i = i+1
+   print(local_params)
+def run(src_raw_array):
+    global local_params
+    print("lsc input shape")
+    print(src_raw_array.shape)
+    return apply_shading_to_image(src_raw_array,local_params[1],local_params[2],local_params[3],read_lsc_eeprom_data(local_params[0],local_params[2],local_params[3]))

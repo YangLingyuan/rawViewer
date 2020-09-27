@@ -7,17 +7,17 @@ __version__ = '0.0.1'
 import numpy as np
 category='MIPIRAW'
 try:
-    from ..raw2rgb.fileoperations import *
+    # from ..raw2rgb.fileoperations import *
     from ..raw2rgb.conversion_rules import *
     from ..raw2rgb.config import *
     from ..raw2rgb.multi_coroutine_cc import MultiCoroutine
 except ImportError:
-    from fileoperations import *
+    # from fileoperations import *
     from conversion_rules import *
     from config import *
     from multi_coroutine_cc import MultiCoroutine    
 
-class Mipiraw2Raw(FileOperations):
+class Mipiraw2Raw():
     '''This module is used to convert mipiraw to raw image
     
     Parameters
@@ -36,8 +36,7 @@ class Mipiraw2Raw(FileOperations):
                     Whether to discard the 2 low-order data when converting 10bit mipi raw images, the default value is True.
 
     '''
-    def __init__(self, path:str, width:int, height:int, stride:int=None, bits:int=10, loss:bool=False):
-        self.__path = path
+    def __init__(self, width:int, height:int, stride:int=None, bits:int=10, loss:bool=False):
         self.__width = width
         self.__height = height
         self.__stride = stride
@@ -46,7 +45,6 @@ class Mipiraw2Raw(FileOperations):
 
         self.__checked = False
         
-        self.path = self.__path
         self.width = self.__width
         self.height = self.__height
         self.stride = self.__stride
@@ -57,18 +55,6 @@ class Mipiraw2Raw(FileOperations):
         self.__rawdata = None
 
     # Attribute operations
-    @property
-    def path(self):
-        return self.__path                                                                                                                   
-
-    @path.setter
-    def path(self, path):
-        if not self.__checked: 
-            if type(path) in [list, str]:
-                self.__file_list = super().get_file_list_from_path(path)
-                self.__path = path
-            else:
-                print_e("Path parameter type error.")
     
     @property
     def width(self):
@@ -111,11 +97,7 @@ class Mipiraw2Raw(FileOperations):
             else:
                 print_e("Bit type error.")
     
-    @property
-    def mipiraw_data(self):
-        return self.__mipiraw_data
-    
-    @mipiraw_data.setter
+
     def mipiraw_data(self, mipiraw_data):
         if isinstance(mipiraw_data, np.ndarray):
             mipiraw_data_len = mipiraw_data.size
@@ -135,29 +117,26 @@ class Mipiraw2Raw(FileOperations):
 
     def toraw(self):
         "The main process of mipi raw conversion to rgb image."    
-        if len(self.__file_list) == 1:
-            self.__toraw_single()
-        elif len(self.__file_list) > 1:
-            self.__toraw_multiple()
+        self.__toraw_single()
         return self.raw_array
     
     def __toraw_single(self):    
-        self.mipiraw_data = super().read_raw_data(self.__file_list[0])
+        # self.mipiraw_data = super().read_raw_data(self.__file_list[0])
         self.raw_data_bytearray = self.mipiraw_remove_stride(self.__mipiraw_data, self.__width, self.__height, self.__stride)
         self.raw_array = self.mipiraw2raw(self.raw_data_bytearray, self.__bits, self.__loss)
     
-    def __toraw_multiple(self):
-        self.mipiraw_data = super().read_raw_data_list(self.__file_list)
-        self.raw_data_bytearray = list()
-        for item in self.mipiraw_data:
-            self.raw_data_bytearray.append(self.mipiraw_remove_stride(item, self.__width, self.__height, self.__stride))    
-        self.raw_array = list()
-        for item in self.raw_data_bytearray:
-            self.raw_array.append(self.mipiraw2raw(item, self.__bits, self.__loss))
+    # def __toraw_multiple(self):
+    #     self.mipiraw_data = super().read_raw_data_list(self.__file_list)
+    #     self.raw_data_bytearray = list()
+    #     for item in self.mipiraw_data:
+    #         self.raw_data_bytearray.append(self.mipiraw_remove_stride(item, self.__width, self.__height, self.__stride))    
+    #     self.raw_array = list()
+    #     for item in self.raw_data_bytearray:
+    #         self.raw_array.append(self.mipiraw2raw(item, self.__bits, self.__loss))
 
     # public classmethod
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw_remove_stride(cls, raw_data:np.ndarray, width:int, height:int, stride:int) -> np.ndarray:
         if raw_data.size == height * stride:
             return raw_data
@@ -176,18 +155,18 @@ class Mipiraw2Raw(FileOperations):
         return None
         
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw8toraw(cls, mipiraw8_array:np.ndarray)->np.ndarray:
         return mipiraw8_array
     
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw10toraw_l(cls, mipiraw10_array: np.ndarray):
         "[0:1] bits are lost when mipi raw 10bit is converted to raw, which will lose precision."
         return (np.delete(mipiraw10_array, np.s_[4::5])*4).astype(np.uint16)
     
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw10toraw(cls, mipiraw10_array: np.ndarray):
         "This is the lossless conversion method of mipi raw to raw."
         mipiraw10_array = mipiraw10_array.reshape((-1,5)).astype(np.uint16)
@@ -202,7 +181,7 @@ class Mipiraw2Raw(FileOperations):
         return np.delete(mipiraw10_array,-1,axis=1).reshape((1,-1))
     
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw12toraw(cls, mipiraw12_array:np.ndarray)->np.ndarray:
         mipiraw12_array = mipiraw12_array.reshape((-1,3)).astype(np.uint16)
         mipiraw12_array[:,0] = np.left_shift(mipiraw12_array[:,0], 4)
@@ -212,13 +191,13 @@ class Mipiraw2Raw(FileOperations):
         return np.delete(mipiraw12_array,-1,axis=1).reshape((1,-1))
     
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw12toraw_l(cls, mipiraw12_array:np.ndarray)->np.ndarray:
         return np.left_shift(np.delete(mipiraw12_array, np.s_[2::3]), 4)
     
 
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw14toraw_l(cls, mipiraw14_array:np.ndarray)->np.ndarray:
         mipiraw14_array.reshape((-1, 7)).astype(np.uint16)
         np.delete(mipiraw14_array,[4,5,6,7],1)
@@ -226,7 +205,7 @@ class Mipiraw2Raw(FileOperations):
         return mipiraw14_array
     
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw14toraw(cls, mipiraw14_array:np.ndarray)->np.ndarray:
         mipiraw14_array.reshape((-1, 7)).astype(np.uint16)
         for index in range(4):
@@ -240,13 +219,13 @@ class Mipiraw2Raw(FileOperations):
         return np.delete(mipiraw14_array,[4,5,6,7],1).reshape((1,-1))
     
     @classmethod
-    @test_run_time
+    # @test_run_time
     def mipiraw16toraw(cls, mipiraw16_array:np.ndarray) -> np.ndarray:
         mipiraw16_array.reshape((-1,2)).astype(np.uint16)
         mipiraw16_array[:,1] = np.left_shift(mipiraw16_array[:,1],8) | mipiraw16_array[:,0]
         return np.delete(mipiraw16_array,[0],1).reshape((1,-1))
     
-path=""
+
 width=None
 height =None 
 stride=None 
@@ -255,8 +234,7 @@ loss=False
 mipiraw2raw_processor=None
 
 def setParameters(args):
-    global path, width, height, stride, bits, loss, mipiraw2raw_processor
-    path = args[-1]
+    global width, height, stride, bits, loss, mipiraw2raw_processor
     args.pop()
     local_params = [width, height, stride, bits, loss]
     # print(args)
@@ -266,7 +244,7 @@ def setParameters(args):
         i=i+1
     # Call main function
 
-    mipiraw2raw_processor = Mipiraw2Raw(path, 
+    mipiraw2raw_processor = Mipiraw2Raw( 
                                 local_params[0],
                                 local_params[1], 
                                 local_params[2],
@@ -276,7 +254,11 @@ def setParameters(args):
 
       
 def run(buffer):
-        buffer = mipiraw2raw_processor.toraw()
-        return buffer
+    mipiraw2raw_processor.mipiraw_data(buffer)
+    buffer = mipiraw2raw_processor.toraw()
+    print("mipiraw output shape")
+    print(buffer.shape)
+    
+    return buffer
 # Shell model Interface
 # mipiraw2raw = Mipiraw2Raw

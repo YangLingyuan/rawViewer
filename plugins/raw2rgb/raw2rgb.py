@@ -392,39 +392,38 @@ def run_debug():
     raw.torgb()
     raw.show()
 
-def run():
-    "Invoke a single module from the command line"
-    parser = argparse.ArgumentParser(description="This is a python module that parses raw format.")
-    
-    # Required parameters
-    parser.add_argument('--path', '-P', help='Raw source file path', required=True)
-    parser.add_argument('--width', '-W', type=int, help='Raw width', required=True)
-    parser.add_argument('--height', '-H', type=int, help='Raw height', required=True) 
-    
-    # Optional parameters
-    parser.add_argument('--stride', '-s', type=int, default=None, help='mipiraw stride')
-    parser.add_argument('--bits', '-b', type=int, default=10, help='Raw precision')    
-    parser.add_argument('--pattern', '-p', type = str, default="RGGB", help='Image bayer pattern')
-    parser.add_argument('--rawtype','-r', type = str, default="mipi", help='Raw type')
-    parser.add_argument('--gain', '-g', type = float, default=1.0, help='Gain applied to image')
-    parser.add_argument('--loss', '-l', type = bool, default=False, help='Choose whether to lose two bits of binary precision')
-    parser.add_argument('--arrangement', '-a', type = str, default="bayer", help='Can choose 4in1 or bayer arrangement')
-    args = parser.parse_args()
+path=""
+width=4000
+height =3000 
+stride=5000 
+bits=10 
+pattern="GRBG" 
+rawtype="mipi" 
+gain=1.0 
+loss=False 
+arrangement="bayer"
+raw2rgb_processor=None
+def setParameters(args):
 
+    global path, width, height, stride, bits, pattern, rawtype, gain, loss, arrangement, raw2rgb_processor
+    local_params = [path, width, height, stride, bits, pattern, rawtype, gain, loss, arrangement]
+    while i < len(args):
+        local_params[i] = args[i]
     # Call main function
-    raw = Raw2RGB(  args.path, 
-                    args.width,
-                    args.height, 
-                    args.stride,
-                    args.bits, 
-                    args.pattern,
-                    args.rawtype,
-                    args.gain, 
-                    args.loss,
-                    args.arrangement).torgb()
-    raw.show()
+    raw2rgb_processor = Raw2RGB(path, 
+                                width,
+                                height, 
+                                stride,
+                                bits, 
+                                pattern,
+                                rawtype,
+                                gain, 
+                                loss,
+                                arrangement)
+    # raw.show()
 
-
+def run():
+    return raw2rgb_processor.torgb()
 
 raw2rgb = Raw2RGB
 

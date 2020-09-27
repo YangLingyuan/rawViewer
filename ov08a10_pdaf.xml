@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--========================================================================-->
+<!-- Copyright (c) 2018-2019 Qualcomm Technologies, Inc.                         -->
+<!-- All Rights Reserved.                                                   -->
+<!-- Confidential and Proprietary - Qualcomm Technologies, Inc.             -->
+<!--========================================================================-->
+<PDConfigData
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="..\..\..\..\api\sensor\camxpdafconfig.xsd">
+  <module_version major_revision="1" minor_revision="0" incr_revision="0"/>
+
+  <PDCommonInfo>
+    <!-- PDAF Name -->
+    <PDAFName>ov08a10_lmi_pdaf</PDAFName>
+    <!--PDAF Sensor Orientation
+        PDAF Sensor orientation
+        Valid values: DEFAULT, MIRROR, FLIP, MIRRORANDFLIP -->
+    <PDOrientation>MIRRORANDFLIP</PDOrientation>
+    <!--Defocus confidence threshold level -->
+    <PDDefocusConfidenceThreshold>200</PDDefocusConfidenceThreshold>
+  </PDCommonInfo>
+  <!-- Resolution 0 -->
+  <PDModeInfo>
+      <!--PDAF Type
+        PD Type
+        Valid Values: PDType1, PDType2, PDType3, PDType2PD -->
+    <PDType>PDType3</PDType>
+    <PDSensorMode>0</PDSensorMode>
+    <PDAFLibraryName>com.qti.stats.pdlib</PDAFLibraryName>
+  <PDSensorNativePatternInfo>
+    <!--Number of PD blocks in X direction
+        2PD: PD Image Width -->
+    <PDBlockCountHorizontal>102</PDBlockCountHorizontal>
+    <!--Number of PD blocks in Y direction
+        2PD: PD Image Height -->
+    <PDBlockCountVertical>76</PDBlockCountVertical>
+    <!--Block Pattern details of one block
+        PDPixelCount:  PDAF pixel number inside a window
+        PDPixelCoordinates: Pixel 2D pos, left_pixel,right_pixel
+        Should not contain the offset.
+        Offset should add back for correct skip pattern.
+        PD Block Pattern -->
+    <PDBlockPattern>
+      <PDPixelCount>16</PDPixelCount>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>1</PDXCoordinate>
+        <PDYCoordinate>17</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>1</PDXCoordinate>
+        <PDYCoordinate>21</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>9</PDXCoordinate>
+        <PDYCoordinate>13</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>9</PDXCoordinate>
+        <PDYCoordinate>9</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>17</PDXCoordinate>
+        <PDYCoordinate>17</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>17</PDXCoordinate>
+        <PDYCoordinate>21</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>25</PDXCoordinate>
+        <PDYCoordinate>13</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>25</PDXCoordinate>
+        <PDYCoordinate>9</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+            <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>1</PDXCoordinate>
+        <PDYCoordinate>33</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>1</PDXCoordinate>
+        <PDYCoordinate>37</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+            <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>9</PDXCoordinate>
+        <PDYCoordinate>29</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>9</PDXCoordinate>
+        <PDYCoordinate>25</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+            <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>17</PDXCoordinate>
+        <PDYCoordinate>33</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>17</PDXCoordinate>
+        <PDYCoordinate>37</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+            <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>25</PDXCoordinate>
+        <PDYCoordinate>29</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>LEFTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--One pixel coordinate in a block -->
+      <PDPixelCoordinates>
+        <PDXCoordinate>25</PDXCoordinate>
+        <PDYCoordinate>25</PDYCoordinate>
+        <!--PDAF Pixel Shield Information
+             Simple Type Definitions  -->
+        <PDPixelShieldInformation>RIGHTSHIELDED</PDPixelShieldInformation>
+      </PDPixelCoordinates>
+      <!--Width and height of the frame or subframe -->
+      <PDBlockDimensions>
+        <width>32</width>
+        <height>32</height>
+      </PDBlockDimensions>
+      <PDOffsetHorizontal>0</PDOffsetHorizontal>
+      <PDOffsetVertical>8</PDOffsetVertical>
+    </PDBlockPattern>
+    <!--Frame dimension: contains xStart, yStart, width and height
+        In-sensor Cropped region -->
+    <PDCropRegion>
+      <xStart>0</xStart>
+      <yStart>0</yStart>
+      <width>3264</width>
+      <height>2448</height>
+    </PDCropRegion>
+    <!--Horizontal Downscale factor -->
+    <PDDownscaleFactorHorizontal>1</PDDownscaleFactorHorizontal>
+    <!--Vertical Downscale factor -->
+    <PDDownscaleFactorVertical>1</PDDownscaleFactorVertical>
+  </PDSensorNativePatternInfo>
+  <!--PD Offset Correction -->
+  <PDOffsetCorrection>-0.2</PDOffsetCorrection>
+  <!--LCR PD Offset Correction -->
+  <lcrPDOffsetCorrection>0.6</lcrPDOffsetCorrection>
+  <!--PDAF Pixel Order Type
+      PD Pixel Order Type
+      Valid Values: LEFTTORIGHT, RIGHTTOLEFT -->
+  <PDPixelOrderType>LEFTTORIGHT</PDPixelOrderType>
+  </PDModeInfo>
+</PDConfigData>

@@ -5,8 +5,9 @@ __author__ = 'Qiu Bowen'
 import numpy as np
 category='RAW'
 obc=0
-def setParameters(Obc:int):
-    obc=Obc
+def setParameters(args):
+    global obc
+    obc=args[0]
 
 def run(raw_data:np.ndarray):
     raw_data[raw_data < obc] = obc
